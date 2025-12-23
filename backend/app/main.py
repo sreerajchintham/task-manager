@@ -42,8 +42,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",  # Vite dev server
-        "http://localhost:3000",  # Alternative
-        # Add your Vercel URL when deployed
+        "http://localhost:3000", 
+        "https://task-manager-brown-mu.vercel.app"
+        #
     ],
     allow_credentials=True,
     allow_methods=["*"],
