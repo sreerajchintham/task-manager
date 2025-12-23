@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
 from app.config import get_settings
@@ -35,8 +35,20 @@ app = FastAPI(
     description="A RESTful API for managing tasks",
     version="1.0.0",
     lifespan=lifespan,
+    redirect_slashes=False,
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",  # Vite dev server
+        "http://localhost:3000",  # Alternative
+        # Add your Vercel URL when deployed
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include routers
 app.include_router(tasks_router)
